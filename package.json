@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Backend para recabar info de gasolineras.",
   "main": "index.js",
-  "repository": "https://github.com/Asner/raids-map.git",
+  "repository": "git@github.com:Asner/gatolinero-js.git",
   "author": "José Eduardo Gaytan Bustamante <jose.gaytan@outlook.com>",
   "license": "ISC",
   "scripts": {
