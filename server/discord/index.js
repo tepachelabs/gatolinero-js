@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 const { of } = require('await-of');
-const Logger = require('#utils/logger');
-const Fetcher = require('#fetcher');
+const Logger = require('../utils/logger');
+const Fetcher = require('../fetcher');
 
-const { DISCORD_CLIENT_TOKEN, DISCORD_PREFIX = '!gato' } = process.env;
+const { TOKEN_DISCORD, DISCORD_PREFIX = '!gato' } = process.env;
 const client = new Discord.Client();
 
 client.on('error', (error) => {
@@ -34,7 +34,7 @@ client.on('message', async function onMessage(message) {
   await newMsg.edit(`Gasofas mas baras: \n${top5}`);
 });
 
-client.login(DISCORD_CLIENT_TOKEN)
+client.login(TOKEN_DISCORD)
   .then(() => {
     Logger.info('Discord login.');
   })
