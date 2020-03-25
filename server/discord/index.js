@@ -15,7 +15,6 @@ client.on('ready', () => {
 });
 
 client.on('message', async function onMessage(message) {
-  Logger.info(`Message ${message.author.username}[${message.author.id}]: ${message.content}`);
   if (message.content.indexOf(DISCORD_PREFIX) !== 0) return;
   const args = message.content.slice(DISCORD_PREFIX.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
