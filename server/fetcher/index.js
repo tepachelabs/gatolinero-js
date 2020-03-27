@@ -6,8 +6,8 @@ const {
 } = process.env;
 
 async function getEstaciones(
-  latitud = 29.075046,
-  longitud = -110.959020,
+  latitud = process.env.DEFAULT_LATITUDE || 29.0729673,
+  longitud = process.env.DEFAULT_LONGITUDE || -110.9559192,
   distanciaMetros = 10000, // 10km
   subproductoid = 13, // Verde
 ) {
