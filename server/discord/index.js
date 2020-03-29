@@ -18,7 +18,7 @@ client.on('ready', () => {
 client.on('message', async function onMessage(message) {
   if (message.author.bot) return;
   if (message.content.indexOf(DISCORD_PREFIX) !== 0) return;
-  const args = [...message.content.slice(DISCORD_PREFIX.length).trim().matchAll(/(?:')(?:.+?)(?:')|(?:")(.+?)(?:")|\S+/g)].map((item) => (item[1] || item[0]));
+  const args = [...message.content.slice(DISCORD_PREFIX.length).trim().matchAll(/(?:')(?:.+?)(?:')|(?:")(.+?)(?:")|(?:“)(.+?)(?:”)|\S+/g)].map((item) => (item[1] || item[0]));
   switch (args[0]) {
     default:
       await defaultCommand(message, args);
