@@ -3,30 +3,7 @@ const { of } = require('await-of');
 const Fetcher = require('../../fetcher');
 const Logger = require('../../utils/logger');
 const Maps = require('../../utils/maps');
-
-const GAS_TYPE = {
-  regular: {
-    key: 'Regular',
-    product_id: 13,
-  },
-  premium: {
-    key: 'Premium',
-    product_id: 14,
-  },
-  diesel: {
-    key: 'Diesel',
-    product_id: 16,
-  },
-};
-
-const GAS_MSG_DICT = {
-  normal: GAS_TYPE.regular,
-  regular: GAS_TYPE.regular,
-  verde: GAS_TYPE.regular,
-  premium: GAS_TYPE.premium,
-  roja: GAS_TYPE.premium,
-  diesel: GAS_TYPE.diesel,
-};
+const { getBotResult, GAS_TYPE, GAS_MSG_DICT } = require('../../utils/messages');
 
 /**
  * No command.
@@ -35,16 +12,17 @@ const GAS_MSG_DICT = {
  */
 module.exports = async function defaultCommand(message, args = []) {
   const [place, , product = 'regular'] = args;
-  let [, distance = 10000] = args;
+  let [, distance = 10] = args;
   let selectedProduct = GAS_TYPE.regular;
   distance = parseInt(distance, 10);
   if (Number.isNaN(distance)) {
     await message.reply('La distancia debe ser un numero.');
     if (distance < 100 || distance > 15000) {
-      await message.reply('La distancia no debe ser menor a 100 metros y mayor a 15km.');
+      await message.reply('La distancia no debe ser menor a 1km o mayor a 15km.');
     }
     return;
   }
+  distance *= 1000; // A metros
   if (GAS_MSG_DICT[product.toLowerCase()]) {
     selectedProduct = GAS_MSG_DICT[product.toLowerCase()];
   }
@@ -102,11 +80,6 @@ module.exports = async function defaultCommand(message, args = []) {
     await newMsg.edit('El API de obtener estaciones me dio error 😩.');
     return;
   }
-  const filtered = response.filter((item) => !!item[selectedProduct.key]).sort((itemA, itemB) => itemA[selectedProduct.key] - itemB[selectedProduct.key]);
-  const top5 = filtered.slice(0, 5).map((item) => {
-    const info = JSON.parse(item.EstacionServicioDetalle);
-    const hasDiesel = (item.Diesel && `\t**Diesel**: ${(item.Diesel || 0).toFixed(2)}`) || '\n\t**Diesel no disponible.**';
-    return `**${info.RazonSocial}**\n\t**Regular:** ${(item.Regular || 0).toFixed(2)}\t**Premium**: ${(item.Premium || 0).toFixed(2)}${hasDiesel}\n\t**Dirección**: ${info.Calle}, ${info.Colonia} ${info.CodigoPostal}\n\t**Mapa**: <https://www.google.com/maps/search/?api=1&query=${info.Latitud},${info.Longitude}>`;
-  }).join('\n');
-  await message.reply(`Gasofas mas baras: \n${top5}`);
+  const botMessage = getBotResult(response, selectedProduct.key);
+  await message.reply(botMessage);
 };

@@ -28,6 +28,7 @@
     "dotenv": "^8.2.0",
     "link-module-alias": "^1.2.0",
     "rollbar": "^2.15.0",
+    "telegraf": "^3.36.0",
     "winston": "^3.2.1"
   }
 }
