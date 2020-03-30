@@ -9,4 +9,5 @@ const Logger = require('./utils/logger');
 module.exports = (function onRun() {
   Logger.info('> Starting services');
   require('./discord');
+  require('./telegram');
 }());
