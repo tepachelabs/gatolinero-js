@@ -17,9 +17,10 @@ module.exports = async function defaultCommand(message, args = []) {
   distance = parseInt(distance, 10);
   if (Number.isNaN(distance)) {
     await message.reply('La distancia debe ser un numero.');
-    if (distance < 100 || distance > 15000) {
-      await message.reply('La distancia no debe ser menor a 1km o mayor a 15km.');
-    }
+    return;
+  }
+  if (distance < 1 || distance > 15) {
+    await message.reply('La distancia no debe ser menor a 1km o mayor a 15km.');
     return;
   }
   distance *= 1000; // A metros
