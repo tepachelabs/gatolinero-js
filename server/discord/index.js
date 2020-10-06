@@ -21,7 +21,7 @@ client.on('message', async function onMessage(message) {
   if (message.content.indexOf(DISCORD_PREFIX) !== 0) return;
   const args = [...message.content.slice(DISCORD_PREFIX.length).trim().matchAll(/(?:')(?:.+?)(?:')|(?:")(.+?)(?:")|(?:“)(.+?)(?:”)|\S+/g)].map((item) => (item[1] || item[0]));
   if (!args.length) {
-    await message.reply(`Por favor, usa: \`${DISCORD_PREFIX} lugar distancia ${Object.keys(GAS_MSG_DICT).join('|')}\`, ejemplo: \`${DISCORD_PREFIX} "Hermosillo, Sonora" 10 regular\``);
+    await message.reply(`Por favor, usa: \`${DISCORD_PREFIX} lugar distancia ${Object.keys(GAS_MSG_DICT).join('|')}\`, ejemplo: \`${DISCORD_PREFIX} "Hermosillo, Sonora" 3 regular\``);
     return;
   }
   switch (args[0]) {

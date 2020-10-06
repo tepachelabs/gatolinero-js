@@ -1,7 +1,7 @@
 {
   "name": "gatolinero-js",
   "version": "1.0.0",
-  "description": "Backend para recabar info de gasolineras.",
+  "description": "Fetch gas station prices.",
   "main": "index.js",
   "repository": "git@github.com:Asner/gatolinero-js.git",
   "author": "José Eduardo Gaytan Bustamante <jose.gaytan@outlook.com>",

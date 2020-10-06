@@ -1,11 +1,10 @@
-
 exports.getBotResult = function getBotResult(data = [], key = 'Regular') {
   return data.filter((item) => !!item[key])
     .sort((itemA, itemB) => itemA[key] - itemB[key])
     .slice(0, 5).map((item) => {
       const info = JSON.parse(item.EstacionServicioDetalle);
       const hasDiesel = (item.Diesel && `\t**Diesel**: ${(item.Diesel || 0).toFixed(2)}`) || '\n\t**Diesel no disponible.**';
-      return `**${info.RazonSocial}**\n\t**Regular:** ${(item.Regular || 0).toFixed(2)}\t**Premium**: ${(item.Premium || 0).toFixed(2)}${hasDiesel}\n\t**Dirección**: ${info.Calle}, ${info.Colonia} ${info.CodigoPostal}\n\t**Mapa**: <https://www.google.com/maps/search/?api=1&query=${info.Latitud},${info.Longitude}>`;
+      return `**⛽️ ${info.RazonSocial}**\n\t**🟢 Regular:** ${(item.Regular || 0).toFixed(2)}\t**🔴 Premium**: ${(item.Premium || 0).toFixed(2)}${hasDiesel}\n\t**📍 Dirección**: ${info.Calle}, ${info.Colonia} ${info.CodigoPostal}\n\t**🗺 Mapa**: <https://www.google.com/maps/search/?api=1&query=${info.Latitud},${info.Longitude}>`;
     })
     .join('\n\n');
 };

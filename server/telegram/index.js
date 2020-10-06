@@ -14,9 +14,9 @@ const { TOKEN_TELEGRAM } = process.env;
 
 const bot = new Telegraf(TOKEN_TELEGRAM);
 
-async function botGetEstaciones(ctx) {
+async function botGetGasStations(ctx) {
   await ctx.reply('Muy bien, ahora buscaré las estaciones mas cercanas 😺');
-  const [response, error] = await of(Fetcher.getEstaciones(
+  const [response, error] = await of(Fetcher.getGasStations(
     ctx.scene.state.latitude,
     ctx.scene.state.longitude,
     ctx.scene.state.distance,
@@ -55,7 +55,7 @@ const gasWizard = new WizardScene('gas_wizard',
     if (button === 'gas_default') {
       ctx.scene.state.gas_type = GAS_TYPE.regular;
       ctx.scene.state.distance = 10000;
-      return botGetEstaciones(ctx);
+      return botGetGasStations(ctx);
     }
     ctx.scene.state.gas_type = GAS_TYPE[button];
     ctx.replyWithMarkdown(`Muy bien, elegiste **${GAS_TYPE[button].key}**. \n¿A cuántos kilometros te gustaría buscar? Escribe la cantidad solamente. Ejemplo: \`5\` para 5km.`);
@@ -70,7 +70,7 @@ const gasWizard = new WizardScene('gas_wizard',
       return ctx.reply('La distancia no debe ser menor a 1km o mayor a 15km.');
     }
     ctx.scene.state.distance = distance * 1000;
-    return botGetEstaciones(ctx);
+    return botGetGasStations(ctx);
   });
 
 const stage = new Stage([gasWizard]);
