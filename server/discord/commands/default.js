@@ -49,6 +49,7 @@ module.exports = async function defaultCommand(message, args = []) {
         },
       }));
       if (autoError) {
+        Logger.error(autoError);
         await newMsg.edit('😿 Hubo un error: No encontré el lugar.');
         return;
       }
@@ -61,6 +62,7 @@ module.exports = async function defaultCommand(message, args = []) {
       // Hacer la llamada de places.
       const [geoResp, geoError] = await Maps.GeocodePlace(placeId);
       if (geoError) {
+        Logger.error(geoError);
         await newMsg.edit('😿 Hubo un error: No encontré el lugar.');
         return;
       }
