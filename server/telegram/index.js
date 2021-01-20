@@ -77,7 +77,7 @@ const stage = new Stage([gasWizard]);
 /* Middlewares */
 bot.use(session());
 bot.use(stage.middleware());
-bot.catch(async function onError(error) {
+bot.catch(function onError(error) {
   Logger.error(error);
 });
 
