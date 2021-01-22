@@ -55,6 +55,7 @@ module.exports = async function defaultCommand(message, args = []) {
       }
       const { data: { status, predictions } } = autoResp;
       if (status !== 'OK') {
+        Logger.error(new Error(`${status}: ${autoResp.data.error_message}`));
         await newMsg.edit(`😿 Hubo un error: No encontré el lugar \`${place}\`. Intenta con otra dirección.`);
         return;
       }
@@ -68,6 +69,7 @@ module.exports = async function defaultCommand(message, args = []) {
       }
       const { status: stats, results: [address] } = geoResp.data;
       if (stats !== 'OK') {
+        Logger.error(new Error(`${stats}: ${geoResp.data.error_message}`));
         await newMsg.edit(`😿 Hubo un error: No encontré el lugar \`${place}\`. Intenta con otra dirección.`);
         return;
       }
