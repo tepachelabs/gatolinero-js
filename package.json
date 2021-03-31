@@ -7,20 +7,26 @@
   "author": "José Eduardo Gaytan Bustamante <jose.gaytan@outlook.com>",
   "license": "ISC",
   "scripts": {
-    "postinstall": "link-module-alias"
+    "postinstall": "link-module-alias",
+    "test:http": "mocha server/http/**/*.spec.js --exit"
   },
   "_moduleAliases": {
     "#utils": "server/utils",
     "#discord": "server/discord",
-    "#fetcher": "server/fetcher"
+    "#fetcher": "server/fetcher",
+    "#http": "server/http",
+    "#test": "test"
   },
   "devDependencies": {
     "@getify/eslint-plugin-proper-arrows": "^8.0.1",
     "@types/koa": "^2.13.1",
+    "chai": "^4.3.4",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-promise": "^4.2.1"
+    "eslint-plugin-promise": "^4.2.1",
+    "mocha": "^8.3.2",
+    "supertest": "^6.1.3"
   },
   "dependencies": {
     "@koa/cors": "^3.1.0",
@@ -30,6 +36,7 @@
     "discord.js": "^12.0.2",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
+    "joi": "^17.4.0",
     "koa": "^2.13.1",
     "koa-helmet": "^6.1.0",
     "koa-logger": "^3.2.1",

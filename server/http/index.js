@@ -1,6 +1,7 @@
 const debug = require('debug')('app:http_server');
 const http = require('http');
 const chalk = require('chalk');
+const Logger = require('#utils/logger');
 const App = require('./app');
 
 // Getting environment variables
@@ -27,4 +28,5 @@ listenAsync(PORT, HOST).then(() => {
   }
 }).catch((error) => {
   debug('Error', error);
+  Logger.error(error);
 });

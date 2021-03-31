@@ -20,6 +20,17 @@ router.get('/', function mainGet(ctx) {
   });
 });
 
+router.use(async function onError(ctx, next) {
+  try {
+    return await next();
+  } catch (error) {
+    ctx.app.emit('error', error, ctx);
+    return ctx.internalServerError({
+      type: 'Server/InternalServerError',
+    });
+  }
+});
+
 router.use('/stations', StationsRouter.allowedMethods(), StationsRouter.routes());
 
 module.exports = router;
